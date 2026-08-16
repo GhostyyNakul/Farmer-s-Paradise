@@ -1,7 +1,17 @@
 import dotenv from 'dotenv';
 import { z } from 'zod';
+import path from 'path';
 
-dotenv.config();
+const result = dotenv.config({
+  path: path.resolve(process.cwd(), '.env'),
+});
+
+console.log('DOTENV:', result.error ? result.error.message : 'loaded');
+console.log('ENV CHECK:', {
+  mongodb: !!process.env.MONGODB_URI,
+  gemini: !!process.env.GEMINI_API_KEY,
+  weather: !!process.env.WEATHER_API_KEY,
+});
 
 const envSchema = z.object({
   PORT: z.coerce.number().default(5000),
