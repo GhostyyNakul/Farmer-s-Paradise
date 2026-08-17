@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import RegistrationModal from './RegistrationModal';
 import { ArrowRight, Sparkles, Sprout, Sun } from 'lucide-react';
 
 export const FinalScene: React.FC = () => {
   const [journeyStarted, setJourneyStarted] = useState(false);
+  const [showRegistration, setShowRegistration] = useState(false);
 
   const scrollToHero = () => {
     const el = document.getElementById('hero');
@@ -54,7 +56,7 @@ export const FinalScene: React.FC = () => {
         {/* Call To Action Buttons (Full-Width Touch Targets on Phones) */}
         <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
           <button
-            onClick={() => setJourneyStarted(true)}
+            onClick={() => setShowRegistration(true)}
             data-cursor="Begin"
             className="w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 rounded-full bg-[#E7C77C] text-[#102C20] font-sans font-bold text-xs sm:text-sm tracking-wider uppercase hover:bg-[#F4D48B] transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-[#E7C77C]/30 flex items-center justify-center space-x-2.5"
           >
@@ -97,6 +99,15 @@ export const FinalScene: React.FC = () => {
           </div>
         </footer>
       </div>
+      {showRegistration && (
+  <RegistrationModal
+    onClose={() => setShowRegistration(false)}
+    onSuccess={() => {
+      setShowRegistration(false);
+      setJourneyStarted(true);
+    }}
+      />
+    )}
     </section>
   );
 };
