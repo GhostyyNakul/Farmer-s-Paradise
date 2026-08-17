@@ -3,8 +3,7 @@
  * All frontend API calls should go through this module.
  */
 
-const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
-
+ 
 export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;

@@ -10,7 +10,7 @@ export async function updateProfile(req: AuthRequest, res: Response): Promise<vo
   const allowed = ['name', 'phone', 'profileImage', 'language', 'location'] as const;
   for (const key of allowed) {
     if (req.body[key] !== undefined) {
-      (req.user as Record<string, unknown>)[key] = req.body[key];
+      (req.user as unknown as Record<string, unknown>)[key] = req.body[key];
     }
   }
 

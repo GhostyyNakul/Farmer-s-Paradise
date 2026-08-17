@@ -48,7 +48,10 @@ class ImageService {
 
   async uploadBuffer(buffer: Buffer, filename: string, folder = 'farmers-paradise'): Promise<ImageUploadResult> {
     if (this.cloudinaryConfigured) {
-      const result = await new Promise<cloudinary.UploadApiResponse>((resolve, reject) => {
+      const result = await new Promise<{
+        secure_url: string;
+        public_id: string;
+      }>((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream({ folder }, (err, res) => {
           if (err || !res) reject(err ?? new Error('Upload failed'));
           else resolve(res);

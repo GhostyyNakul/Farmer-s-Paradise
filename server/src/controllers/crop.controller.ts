@@ -50,7 +50,7 @@ export async function deleteCrop(req: AuthRequest, res: Response): Promise<void>
 }
 
 export async function listFarmCrops(req: AuthRequest, res: Response): Promise<void> {
-  await verifyFarmOwnership(req.user!._id.toString(), req.params.farmId);
+  await verifyFarmOwnership(req.user!._id.toString(), String(req.params.farmId));
   const crops = await Crop.find({ farmId: req.params.farmId, userId: req.user!._id });
   sendSuccess(res, crops);
 }

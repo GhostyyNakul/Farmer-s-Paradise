@@ -66,7 +66,7 @@ export async function chat(req: AuthRequest, res: Response): Promise<void> {
 
   if (consultation) {
     consultation.messages = messages;
-    consultation.diagnosis = aiResponse;
+    consultation.diagnosis = aiResponse as unknown as Record<string, unknown>;
     consultation.recommendations = aiResponse.recommendedActions;
     await consultation.save();
   } else {
